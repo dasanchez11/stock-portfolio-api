@@ -8,16 +8,16 @@ module.exports = async (req,res,next) =>{
         return res.status(401).json({message:'Authorization Error'})
     }
 
-    // const token = req.headers.authorization
-    const token = req.cookies.token
+    const token = req.headers.authorization
+    // const token = req.cookies.token
     let decodedToken
     if(!token){
         return res.status(401).json({message:'Authentication Invalid'})
     }
 
     try {
-        decodedToken =  jwt.verify(token,process.env.SECRET_KEY)
-        // decodedToken =  jwt.verify(token.slice(7),process.env.SECRET_KEY)
+        // decodedToken =  jwt.verify(token,process.env.SECRET_KEY)
+        decodedToken =  jwt.verify(token.slice(7),process.env.SECRET_KEY)
 
         
         
