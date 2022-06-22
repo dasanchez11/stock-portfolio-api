@@ -40,15 +40,18 @@ exports.addStock = async (req,res,next) =>{
     const {userId} = req.user
     const {name,ticker,typeOfAsset,addValues,name_alpha} = req.body.data
     let {entryPrice,numOfShares} = addValues
-    
     try {
+        if(!numOfShares){
+            const error = new Error('Number of Shares Must be defined')
+            error.status = 401;
+            throw error
+        }
         const user = await User.findById(userId)
         if(!user){
             const error = new Error('User with this email could not be found')
             error.status = 401;
             throw error
             
-
         }
         
         const result = await utils.getTickerPrice(ticker,'1h',8)
@@ -66,6 +69,8 @@ exports.addStock = async (req,res,next) =>{
             typeOfAsset:typeOfAsset,
             name_alpha:name_alpha
         })
+
+
 
         const results = await stock.save()
         user.assets.push(stock)

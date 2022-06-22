@@ -25,6 +25,7 @@ module.exports = async (req,res,next) =>{
         return res.status(500).json({message:'Not Authorized'})
         
     }
+   
 
     if(!decodedToken){
         return res.status(401).json({message:'Problem Authorizing the request'})

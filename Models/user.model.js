@@ -26,10 +26,17 @@ const userSchema = new Schema({
         lowercase:true,
         trim:true
     },
+    emailVerified:String,
+    emailVerifyToken:String,
     assets:[{
         type: Schema.Types.ObjectId,
         ref: 'Stock'
-    }]
+    }],
+    resetToken:{
+        type: String},
+    resetTokenExpiration: {
+        type:Date
+    }
 
 });
 
