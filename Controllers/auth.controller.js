@@ -127,7 +127,7 @@ exports.resetPassword = async (req, res, next) => {
         // Send Email
         const ses = new aws.SES()
         const name = user.firstName
-        const link = `http://localhost:3000/newpassword/${token}`
+        const link = `https://peppy-duckanoo-789c6c.netlify.app/newpassword/${token}`
         const from_mail = 'dasarug@gmail.com'
         const to_mail = email
 
